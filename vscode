@@ -1,0 +1,41 @@
+#!/bin/bash
+SCHOOL="School"
+PERSONAL="Personal"
+SCRIPTS="scripts"
+DOCUMENTS="Documents"
+SUCKLESS="suckless"
+LV="lv"
+DIR="/home/daniel/"
+PROJECT=$( echo -e "$SCHOOL\n$PERSONAL\n$SCRIPTS\n$DOCUMENTS\n$SUCKLESS\n$LV" | dmenu -i -l 6)
+case $PROJECT in
+$SCHOOL)
+DIR=$DIR"Desktop/yu-git"
+;;
+$PERSONAL)
+DIR=$DIR"Projects"
+;;
+$SCRIPTS)
+DIR=$DIR"scripts"
+;;
+$DOCUMENTS)
+DIR=$DIR"Documents"
+;;
+$SUCKLESS)
+DIR=$DIR"suckless"
+;;
+$LV)
+DIR=$DIR"lv"
+esac
+
+while [ $PROJECT != "0" ]
+do
+	PROJECT=$(ls -a $DIR | dmenu -i -l 20)
+	DIR=$DIR"/"$PROJECT
+done
+
+if [ $DIR = "exit" ];
+then
+	exit
+else
+	code ${DIR:0:${#DIR}-1}
+fi

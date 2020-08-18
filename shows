@@ -1,0 +1,2 @@
+#! /bin/bash
+st -e sh -c "~/Downloads/nvim.appimage ~/shows.md"
